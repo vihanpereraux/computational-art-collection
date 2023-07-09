@@ -1,5 +1,9 @@
+let aspectRatio = 16/9;
+let canvasWidth = 390;
+let canvasHeight = canvasWidth*aspectRatio;
+
 function setup() {
-  createCanvas(400, 600);
+  createCanvas(canvasWidth, canvasHeight);
 }
 
 function draw() {

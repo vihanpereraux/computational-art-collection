@@ -4,5 +4,20 @@ html, body {
 }
 
 canvas {
+  position: absolute;
+  top: 0;
   display: block;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  top: 50%;
+}
+
+#image-pacement{
+  position: absolute;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  top: 50%;
+  width: 27vw;
+  aspect-ratio: 9/16;
+  background: darkblue;
 }
