@@ -1,6 +1,7 @@
 html, body {
   margin: 0;
   padding: 0;
+  background: black;
 }
 
 canvas {
@@ -19,7 +20,7 @@ canvas {
   top: 50%;
   width: 27vw;
   aspect-ratio: 9/16;
-  background: darkblue;
+  background: none;
 }
 #image-pacement img{
   position: absolute;
@@ -28,3 +29,22 @@ canvas {
   height: 100%;
 }
 
+#trackbutton{
+  position: absolute;
+  right: 2%;
+  bottom: 4%;
+  width: 150px;
+  height: 45px;
+  background: white;
+  border: none;
+  box-shadow: none;
+  border-radius: 8px;
+}
+.canvasbox{
+  transform: translate(0%, 100%);
+  left: 0;
+  width: 15%;
+}
+#myvideo{
+  display: none;
+}

@@ -16,9 +16,8 @@ imageArray = [
     './assets/img/img-09.jpeg',
     './assets/img/img-10.jpeg',
 ]
-loopTime = 500;
+loopTime = 100;
 intervalOne = setInterval(() => {
     randomIndex = Math.floor(Math.random() * 10)
     image.src = imageArray[randomIndex]
 }, loopTime);
-
