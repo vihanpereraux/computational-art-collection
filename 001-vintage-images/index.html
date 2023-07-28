@@ -16,11 +16,17 @@
   <body>
     <div id="image-pacement"><img id="image" src="" alt=""></div>
 
-    <button onclick="toggleVideo()" id="trackbutton" class="bx--btn bx--btn--secondary" type="button">
+    <button onclick="toggleVideo()" id="trackbutton" type="button">
       Toggle Video
     </button>
     <video class="videobox canvasbox" autoplay="autoplay" id="myvideo"></video>
     <canvas id="canvas" class="border canvasbox"></canvas>
+    <div id="detail-log-wrapper">
+      <p id="bbox"></p>
+      <p id="class"></p>
+      <p id="label"></p>
+      <p id="score"></p>
+    </div>
   
     <script src="https://unpkg.com/carbon-components@latest/scripts/carbon-components.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/handtrackjs/dist/handtrack.min.js"> </script>
