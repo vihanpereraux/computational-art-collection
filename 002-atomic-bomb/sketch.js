@@ -7,11 +7,12 @@ let intervalOne;
 let intervalTwo;
 let footageNames = [];
 let intervalCounter;
+let dataTable;
 
 intervalOne = setInterval(() => {
   randomizer = round(random(-50, 50));
   randomTimeStamp = round(random(0, 3*60) + randomizer);
-  console.log(randomTimeStamp);
+  // console.log(randomTimeStamp);
   mideaElement.currentTime = randomTimeStamp;
 }, 250);
 
@@ -27,9 +28,16 @@ intervalTwo = setInterval(() => {
   intervalCounter = intervalCounter + 5;
 }, 4000);
 
+function preload(){
+  dataTable = loadTable('assets/data/data.csv');
+}
+
 function setup() {
   createCanvas(1080/devider, 1920/devider);
   background(canvasColor);
+  console.log("Row Count" , dataTable.getRowCount());
+  console.log("Column Count" , dataTable.getColumnCount());
+  console.log("Data" , dataTable.getString(2, 1));
 }
 
 function draw() {
