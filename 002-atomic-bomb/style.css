@@ -22,7 +22,7 @@ canvas {
 
 .stat{
   text-transform: uppercase;
-  color: red;
+  color: rgb(149, 255, 0);
   font-size: 15px;
   position: absolute;
   z-index: 3;
@@ -31,18 +31,33 @@ canvas {
 }
 #city{
   transform: translate(-50%, -50%);
-  top: 50%;
+  top: 48%;
   left: 50%;
 }
 #latitude{
   transform: translateY(-50%);
-  top: 50%;
+  top: 48%;
   left: 3%;
 }
 #longitude{
   transform: translateY(-50%);
-  top: 50%;
+  top: 48%;
   right: 3%;
+}
+#year{
+  transform: translateX(-50%);
+  left: 50%;
+  bottom: 0;
+}
+#yeild-lower{
+  /* color: white !important; */
+  top: 0;
+  left: 5%;
+}
+#yeild-upper{
+  /* color: white !important; */
+  top: 0;
+  right: 5%;
 }
 
 #clips-wrapper{
@@ -79,4 +94,24 @@ canvas {
 }
 #image-03{
   margin-top: 426px;
+}
+#paper-tape-one{
+  filter: grayscale(.5);
+  position: absolute;
+  width: 107%;
+  z-index: 3;
+  height: 40px;
+  margin-top: 190px;
+  transform: translateX(-50%);
+  left: 50%;
+}
+#paper-tape-two{
+  filter: grayscale(.5);
+  position: absolute;
+  width: 107%;
+  z-index: 3;
+  height: 40px;
+  margin-top: 400px;
+  /* transform: translateX(-50%) rotate(2deg); */
+  left: 50%;
 }
