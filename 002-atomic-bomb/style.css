@@ -99,7 +99,7 @@ canvas {
   filter: grayscale(.5);
   position: absolute;
   width: 107%;
-  z-index: 3;
+  z-index: 12;
   height: 40px;
   margin-top: 190px;
   transform: translateX(-50%);

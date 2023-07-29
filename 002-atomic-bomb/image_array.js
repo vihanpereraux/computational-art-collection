@@ -12,4 +12,18 @@ let citeImages = [
     ['./assets/images/hiroshima/img-04.jpg' ,'hiroshima'],
     ['./assets/images/hiroshima/img-05.jpg' ,'hiroshima'],
     ['./assets/images/hiroshima/img-06.jpg' ,'hiroshima'],
+
+    ['./assets/images/bikini/img-01.jpg' ,'bikini'],
+    ['./assets/images/bikini/img-02.jpg' ,'bikini'],
+    ['./assets/images/bikini/img-03.jpg' ,'bikini'],
+    ['./assets/images/bikini/img-04.jpg' ,'bikini'],
+    ['./assets/images/bikini/img-05.jpg' ,'bikini'],
+    ['./assets/images/bikini/img-06.jpg' ,'bikini'],
+
+    ['./assets/images/semi-kazakh/img-01.jpg' ,'semi-kazakh'],
+    ['./assets/images/semi-kazakh/img-02.jpg' ,'semi-kazakh'],
+    ['./assets/images/semi-kazakh/img-03.jpg' ,'semi-kazakh'],
+    ['./assets/images/semi-kazakh/img-04.jpg' ,'semi-kazakh'],
+    ['./assets/images/semi-kazakh/img-05.jpg' ,'semi-kazakh'],
+    ['./assets/images/semi-kazakh/img-06.jpg' ,'semi-kazakh'],
   ];
