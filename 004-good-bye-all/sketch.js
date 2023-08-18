@@ -1,5 +1,7 @@
+let devider = 3;
+
 function setup() {
-  createCanvas(400, 400);
+  createCanvas(1080/devider, 1920/devider);
 }
 
 function draw() {
