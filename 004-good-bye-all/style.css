@@ -14,7 +14,7 @@ canvas {
   left: 50%;
   top: 50%;
   display: block;
-  z-index: 10;
+  z-index: 12;
 }
 
 #block-one-wrapper{
@@ -27,9 +27,24 @@ canvas {
   z-index: 11;
 }
 #block-one-key-image{
+  position: absolute;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  top: 50%;
+  filter: grayscale(1);
+  width: 85%;
+  height: 85%;
+  /* background: darkblue; */
+  object-fit: cover;
+  z-index: 10;
+}
+#block-one-other-images{
+  position: absolute;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  top: 50%;
   filter: grayscale(1);
   width: 100%;
   height: 100%;
   object-fit: cover;
-  position: absolute;
 }

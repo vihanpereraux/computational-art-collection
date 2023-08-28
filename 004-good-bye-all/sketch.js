@@ -5,14 +5,23 @@ let blockOneOtherImages;
 let devider = 3;
 
 function setup() {
+  frameRate(6);
   createCanvas(1080/devider, 1920/devider);
-  background(220);
 }
 
 function draw() {
+  clear();
+
   blockOne();
-  // fill(255, 0, 0)
-  // circle(mouseX, mouseY, 20, 20)
+
+  fill(255);
+  stroke(255);
+  strokeWeight(2)
+  rect(
+    random(185, 195), 
+    random(170, 185), 
+    50, 
+    50);
 }
 
 function blockOne(){
