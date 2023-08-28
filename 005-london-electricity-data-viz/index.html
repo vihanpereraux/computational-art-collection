@@ -8,11 +8,58 @@
 
     <link rel="stylesheet" type="text/css" href="style.css">
 
-    <script src="libraries/p5.min.js"></script>
-    <script src="libraries/p5.sound.min.js"></script>
+    <!-- <script src="libraries/p5.min.js"></script> -->
+    <!-- <script src="libraries/p5.sound.min.js"></script> -->
+    <script src="watercanvas.js"></script>
+
+    <script>
+      var width = 500;
+      var height = 500;
+      
+      function init(){
+        var waterModel = new WaterModel(width, height, {
+            resolution:2.0,
+            interpolate:false,
+            damping:0.985,
+            clipping:5,
+            evolveThreshold:0.05,
+            maxFps:30,
+            showStats:true
+          });
+        
+        var waterCanvas = new WaterCanvas(width, height,
+        "waterHolder", waterModel, {
+            backgroundImageUrl:"images/source.jpg",
+            lightRefraction:10,
+            lightReflection:0.5,
+            maxFps:60,
+            showStats:true
+          });
+      
+        var finger = [
+          [0.5, 1.0, 0.5],
+          [1.0, 1.0, 1.0],
+          [0.5, 1.0, 0.5]
+        ];
+
+        document.body.addEventListener('mousemove', function(event){
+          console.log(event.clientX);
+          console.log(event.clientY);
+          waterModel.touchWater(event.clientX, event.clientY, 1.5, finger);
+        })
+      }
+    </script>
   </head>
 
-  <body>
-    <script src="sketch.js"></script>
+  <body onload="init()">
+    <div style="position: relative; z-index: 1; opacity: 0.1;" id="waterHolder"></div>
+
+    <video 
+      autoplay loop muted
+      style="position: absolute; top: 0; width: 500px; height: 500px; z-index: 0; left: 0; object-fit: cover;"
+      src="./images/source.mp4">
+    </video>
+
+    <!-- <script src="sketch.js"></script> -->
   </body>
 </html>
