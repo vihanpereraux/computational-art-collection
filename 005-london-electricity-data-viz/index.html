@@ -13,8 +13,8 @@
     <script src="watercanvas.js"></script>
 
     <script>
-      var width = 500;
-      var height = 500;
+      var width = 360;
+      var height = 640;
       
       function init(){
         var waterModel = new WaterModel(width, height, {
@@ -30,10 +30,10 @@
         var waterCanvas = new WaterCanvas(width, height,
         "waterHolder", waterModel, {
             backgroundImageUrl:"images/source.jpg",
-            lightRefraction:10,
-            lightReflection:0.5,
-            maxFps:60,
-            showStats:true
+            lightRefraction: 20,
+            lightReflection: .8,
+            maxFps: 60,
+            showStats: true
           });
       
         var finger = [
@@ -41,22 +41,45 @@
           [1.0, 1.0, 1.0],
           [0.5, 1.0, 0.5]
         ];
+        
+        // Math.floor(Math.random() * (max - min) ) + min;
+        // setInterval(() => {
+        //   waterModel.touchWater(
+        //     Math.floor(Math.random() * (190 - 160) ) + 160,
+        //     // 180, 
+        //     Math.floor(Math.random() * (320 - 310) ) + 310,
+        //     // 320, 
+        //     .5, 
+        //     finger);
+        // }, 100);
 
-        document.body.addEventListener('mousemove', function(event){
+        setInterval(() => {
+          for (let index = 0; index < 10; index++) {
+            waterModel.touchWater(
+            Math.floor(Math.random() * (230 - 160) ) + 160,
+            // 180, 
+            Math.floor(Math.random() * (200 - 310) ) + 310,
+            // 320, 
+            .5, 
+            finger);
+            // waterModel.touchWater(180, 320, .5, finger);
+          }
+        }, 300);
+
+        document.getElementById('waterHolder').addEventListener('mousemove', function(event){
           console.log(event.clientX);
           console.log(event.clientY);
-          waterModel.touchWater(event.clientX, event.clientY, 1.5, finger);
+          waterModel.touchWater((event.clientX - 340), (event.clientY - 30), .5, finger);
         })
       }
     </script>
   </head>
 
   <body onload="init()">
-    <div style="position: relative; z-index: 1; opacity: 0.1;" id="waterHolder"></div>
+    <div id="waterHolder"></div>
 
     <video 
       autoplay loop muted
-      style="position: absolute; top: 0; width: 500px; height: 500px; z-index: 0; left: 0; object-fit: cover;"
       src="./images/source.mp4">
     </video>
 
