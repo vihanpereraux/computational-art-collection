@@ -8,81 +8,14 @@
 
     <link rel="stylesheet" type="text/css" href="style.css">
 
-    <!-- <script src="libraries/p5.min.js"></script> -->
-    <!-- <script src="libraries/p5.sound.min.js"></script> -->
-    <script src="watercanvas.js"></script>
-
-    <script>
-      var width = 360;
-      var height = 640;
-      
-      function init(){
-        var waterModel = new WaterModel(width, height, {
-            resolution:2.0,
-            interpolate:false,
-            damping:0.985,
-            clipping:5,
-            evolveThreshold:0.05,
-            maxFps:30,
-            showStats:true
-          });
-        
-        var waterCanvas = new WaterCanvas(width, height,
-        "waterHolder", waterModel, {
-            backgroundImageUrl:"images/source.jpg",
-            lightRefraction: 20,
-            lightReflection: .8,
-            maxFps: 60,
-            showStats: true
-          });
-      
-        var finger = [
-          [0.5, 1.0, 0.5],
-          [1.0, 1.0, 1.0],
-          [0.5, 1.0, 0.5]
-        ];
-        
-        // Math.floor(Math.random() * (max - min) ) + min;
-        // setInterval(() => {
-        //   waterModel.touchWater(
-        //     Math.floor(Math.random() * (190 - 160) ) + 160,
-        //     // 180, 
-        //     Math.floor(Math.random() * (320 - 310) ) + 310,
-        //     // 320, 
-        //     .5, 
-        //     finger);
-        // }, 100);
-
-        setInterval(() => {
-          for (let index = 0; index < 10; index++) {
-            waterModel.touchWater(
-            Math.floor(Math.random() * (230 - 160) ) + 160,
-            // 180, 
-            Math.floor(Math.random() * (200 - 310) ) + 310,
-            // 320, 
-            .5, 
-            finger);
-            // waterModel.touchWater(180, 320, .5, finger);
-          }
-        }, 300);
-
-        document.getElementById('waterHolder').addEventListener('mousemove', function(event){
-          console.log(event.clientX);
-          console.log(event.clientY);
-          waterModel.touchWater((event.clientX - 340), (event.clientY - 30), .5, finger);
-        })
-      }
-    </script>
+    <script src="libraries/p5.min.js"></script>
+    <script src="libraries/p5.sound.min.js"></script>
   </head>
 
-  <body onload="init()">
-    <div id="waterHolder"></div>
-
-    <video 
-      autoplay loop muted
-      src="./images/source.mp4">
-    </video>
-
-    <!-- <script src="sketch.js"></script> -->
+  <body>
+    <iframe
+      id="visual-effect" 
+      src="http://127.0.0.1:5500/005-london-electricity-data-viz/visual-effect/index.html" frameborder="0"></iframe>
+    <script src="sketch.js"></script>
   </body>
 </html>
