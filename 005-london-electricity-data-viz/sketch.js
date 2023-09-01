@@ -1,9 +1,17 @@
 function setup() {
-  const canvas = createCanvas(400, 400);
-  canvas.parent("test")
-  canvas.style("display", "none")
+  createCanvas(360, 640);
 }
 
 function draw() {
-  background(220);
+  frameRate(7)
+  clear()
+
+  noFill();
+  stroke(255);
+  strokeWeight(.7);
+  rect(
+    random(100, 110), 
+    random(180, 200), 
+    random(70, 90), 
+    random(70, 90));
 }
