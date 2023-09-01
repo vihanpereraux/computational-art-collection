@@ -53,6 +53,7 @@
 	
 	
     this.canvas = document.createElement('canvas');  
+	this.canvas.setAttribute("id", "lolz")
     this.canvasHelp = document.createElement('canvas'); 
 
 	if(!this.canvas.getContext || !this.canvasHelp.getContext){ 
