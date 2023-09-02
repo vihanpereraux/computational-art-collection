@@ -148,6 +148,44 @@ function blockThree(imageName){
     });
 }
 
+function blockFour(imageName){
+    var waterCanvas = new WaterCanvas(width, height,
+        "waterHolder", waterModel, {
+        backgroundImageUrl: "images/" + imageName,
+        // lightRefraction: Math.floor(Math.random() * (5 - 1) ) + 1,
+        lightRefraction: 8,
+        lightReflection: .01,
+        maxFps: 60,
+        showStats: false
+    });
+
+    // Math.floor(Math.random() * (max - min) ) + min;
+    let xMax, xMin, yMax, yMin;
+    let multiplier = 2;
+    xMax = 150 * multiplier;
+    xMin = 100 * multiplier;
+    yMax = 230 * multiplier;
+    yMin = 180 * multiplier;
+    
+    setInterval(() => {
+        for (let index = 0; index < 50; index++) {
+            waterModel.touchWater(
+                Math.floor(Math.random() * (xMax - xMin)) + xMin,
+                // 180, 
+                Math.floor(Math.random() * (yMax - yMin)) + yMin,
+                // 0, 
+                .5,
+                finger);
+            // waterModel.touchWater(180, 320, .5, finger);
+        }
+    }, 300);
+
+    document.getElementById('waterHolder').addEventListener('mousemove', function (event) {
+        waterModel.touchWater((event.clientX - 340), (event.clientY - 30), .5, finger);
+    });
+}
+
+
 setTimeout(() => {
     switch (blockNumber) {
         case "1":
@@ -161,7 +199,11 @@ setTimeout(() => {
         case "3":
             blockThree("image_03.jpg");
             break;
-    
+
+        case "4":
+            blockFour("image_04.jpg");
+            break;
+
         default:
             break;
     }
