@@ -219,8 +219,8 @@ function blockThree(){
   stroke(255);
   strokeWeight(.7);
 
-  randomXValue = random(170, 200);
-  randomYValue = random(230, 210);
+  randomXValue = random(140, 170);
+  randomYValue = random(300, 260);
   randomWidth = random(140, 120);
   randomHeight = random(140, 120);
 
