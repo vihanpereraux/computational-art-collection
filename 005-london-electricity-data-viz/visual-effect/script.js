@@ -1,3 +1,6 @@
+let blockNumber = prompt('Enter the block number');
+localStorage.setItem("blockNumber", blockNumber);
+
 var width = 360;
 var height = 640;
 
@@ -96,6 +99,16 @@ function blockTwo(imageName){
 }
 
 setTimeout(() => {
-    blockOne("image_01.jpg");
-    // blockTwo("image_02.jpg");
+    switch (blockNumber) {
+        case "1":
+            blockOne("image_01.jpg");
+            break;
+
+        case "2":
+            blockOne("image_02.jpg");
+            break;
+    
+        default:
+            break;
+    }
 }, 100);

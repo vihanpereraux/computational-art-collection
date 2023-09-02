@@ -12,6 +12,8 @@ let randomYValue;
 let randomWidth;
 let randomHeight;
 
+let blockNumber;
+
 function preload(){
   dataTable = loadTable('source/data/historic_demand_year_2023.csv');
 }
@@ -19,12 +21,21 @@ function preload(){
 function setup() {
   frameRate(8);  
   createCanvas(360, 640);
+  blockNumber = localStorage.getItem('blockNumber');
 }
 
 function draw() {
   clear();
-  blockOne();
-  // blockTwo();
+  
+  switch (blockNumber) {
+    case "1":
+      blockOne();    
+      break;
+  
+    case "2":
+      blockTwo();    
+      break;
+  }
 }
 
 function blockOne(){
