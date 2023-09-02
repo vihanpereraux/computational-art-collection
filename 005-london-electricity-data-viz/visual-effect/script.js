@@ -12,7 +12,7 @@ var waterModel = new WaterModel(width, height, {
     clipping: 5,
     evolveThreshold: 0.05,
     maxFps: 30,
-    showStats: true
+    showStats: false
 });
 
 var finger = [
@@ -30,13 +30,13 @@ function blockOne(imageName) {
         clipping: 5,
         evolveThreshold: 0.05,
         maxFps: 30,
-        showStats: true
+        showStats: false
     });
 
     var waterCanvas = new WaterCanvas(width, height,
         "waterHolder", waterModel, {
         backgroundImageUrl: "images/" + imageName,
-        lightRefraction: Math.floor(Math.random() * (5 - 1) ) + 1,
+        lightRefraction: 2.2,
         lightReflection: .01,
         maxFps: 60,
         showStats: true
@@ -73,7 +73,7 @@ function blockTwo(imageName){
         "waterHolder", waterModel, {
         backgroundImageUrl: "images/" + imageName,
         // lightRefraction: Math.floor(Math.random() * (5 - 1) ) + 1,
-        lightRefraction: 4,
+        lightRefraction: 8,
         lightReflection: .01,
         maxFps: 60,
         showStats: false
@@ -98,6 +98,42 @@ function blockTwo(imageName){
     });
 }
 
+function blockThree(imageName){
+    var waterCanvas = new WaterCanvas(width, height,
+        "waterHolder", waterModel, {
+        backgroundImageUrl: "images/" + imageName,
+        // lightRefraction: Math.floor(Math.random() * (5 - 1) ) + 1,
+        lightRefraction: 10,
+        lightReflection: .01,
+        maxFps: 60,
+        showStats: false
+    });
+
+    // Math.floor(Math.random() * (max - min) ) + min;
+    let xMax, xMin, yMax, yMin;
+    xMax = 280;
+    xMin = 260;
+    yMax = 350;
+    yMin = 320;
+    
+    setInterval(() => {
+        for (let index = 0; index < 50; index++) {
+            waterModel.touchWater(
+                Math.floor(Math.random() * (xMax - xMin)) + xMin,
+                // 180, 
+                Math.floor(Math.random() * (yMax - yMin)) + yMin,
+                // 320, 
+                .5,
+                finger);
+            // waterModel.touchWater(180, 320, .5, finger);
+        }
+    }, 300);
+
+    document.getElementById('waterHolder').addEventListener('mousemove', function (event) {
+        waterModel.touchWater((event.clientX - 340), (event.clientY - 30), .5, finger);
+    });
+}
+
 setTimeout(() => {
     switch (blockNumber) {
         case "1":
@@ -106,6 +142,10 @@ setTimeout(() => {
 
         case "2":
             blockOne("image_02.jpg");
+            break;
+
+        case "3":
+            blockOne("image_03.jpg");
             break;
     
         default:

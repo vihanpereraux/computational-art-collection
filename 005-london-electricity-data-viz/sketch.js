@@ -26,7 +26,7 @@ function setup() {
 
 function draw() {
   clear();
-  
+
   switch (blockNumber) {
     case "1":
       blockOne();    
@@ -34,6 +34,10 @@ function draw() {
   
     case "2":
       blockTwo();    
+      break;
+
+    case "3":
+      blockThree();    
       break;
   }
 }
@@ -133,6 +137,92 @@ function blockTwo(){
   randomYValue = random(120, 150);
   randomWidth = random(90, 120);
   randomHeight = random(90, 120);
+
+  // get relative pointsss : ) 
+  randomSettlementDate = Math.round(random(1, dataTable.getRowCount()));
+
+  // line one
+  line(
+    0, 
+    randomYValue + randomHeight/2, 
+    randomXValue, 
+    randomYValue + randomHeight/2);
+
+  // line two
+  line(
+    randomXValue + randomWidth/2, 
+    randomYValue + randomHeight, 
+    randomXValue + randomWidth/2, 
+    height);
+
+  // line three
+  line(
+    randomXValue + randomWidth, 
+    randomYValue + randomHeight/2, 
+    width, 
+    randomYValue + randomHeight/2);
+
+  // line four
+  line(
+    randomXValue + randomWidth/2, 
+    randomYValue, 
+    randomXValue + randomWidth/2, 
+    0);
+
+  englandWalesDemand = dataTable.getString(randomSettlementDate, 4);
+  console.log(englandWalesDemand);
+  if(englandWalesDemand > 20000){
+    stroke(255, 0, 0);
+    strokeWeight(1);
+    rect(
+      randomXValue, 
+      randomYValue, 
+      randomWidth, 
+      randomHeight);
+
+    fill(255, 0, 0);
+    strokeWeight(.5);
+    text(englandWalesDemand, (randomXValue + randomWidth/2) - 10, randomYValue + randomHeight/2);
+  }
+  else{
+    stroke(255);
+    strokeWeight(1);
+    rect(
+      randomXValue, 
+      randomYValue, 
+      randomWidth, 
+      randomHeight);
+
+    fill(255);
+    strokeWeight(.5);
+    text(englandWalesDemand, (randomXValue + randomWidth/2) - 10, randomYValue + randomHeight/2);
+  }
+
+  embeddedWindGeneration = dataTable.getString(randomSettlementDate, 5);
+  embeddedWindCapacity = dataTable.getString(randomSettlementDate, 6);
+  embeddedSolorGeneration = dataTable.getString(randomSettlementDate, 7);
+  embeddedSolorCapacity = dataTable.getString(randomSettlementDate, 8);
+
+  textSize(10);
+  fill(255);
+  stroke(255);
+  strokeWeight(.5);
+
+  text(embeddedWindGeneration, randomXValue, randomYValue - 10);
+  text(embeddedWindCapacity, (randomXValue + randomWidth) - 20, randomYValue - 10);
+  text(embeddedSolorGeneration, randomXValue, (randomYValue + randomHeight) + 15);
+  text(embeddedSolorCapacity, (randomXValue + randomWidth) - 25, (randomYValue + randomHeight) + 15);
+}
+
+function blockThree(){
+  noFill();
+  stroke(255);
+  strokeWeight(.7);
+
+  randomXValue = random(170, 200);
+  randomYValue = random(230, 210);
+  randomWidth = random(140, 120);
+  randomHeight = random(140, 120);
 
   // get relative pointsss : ) 
   randomSettlementDate = Math.round(random(1, dataTable.getRowCount()));
