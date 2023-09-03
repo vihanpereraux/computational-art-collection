@@ -1,36 +1,30 @@
-let xoff = 0;
 let start = 0;
 
 function setup() {
   // createCanvas(window.innerWidth, window.innerHeight);
-  createCanvas(400, 400);
-  // createCanvas(200, 200);
+  // createCanvas(400, 400);
+  createCanvas(200, 200);
+  pixelDensity(1);
 }
 
 function draw() {
+  let xoff = 0;
   background(50);
+  loadPixels();
+  for (let x = 0; x < width; x++) {
+    for (let y = 0; y < height; y++) {
+      // let r = random(0, 255);
+      let r = noise(xoff) * 255;
+      let index = (x + y * width) * 4;
+      pixels[index + 0] = r;
+      pixels[index + 1] = r;
+      pixels[index + 2] = r;
+      pixels[index + 3] = 255;
 
-  // let x = random(width);
-  xoff += 0.02;
-  let x = map(noise(xoff), 0, 1, 0, width);
-  let y = map(noise(xoff + 1000), 0, 1, 0, height);
-
-  noFill();
-  stroke(255);
-  ellipse(x, y, 25, 25);
-
-  beginShape();
-  stroke(255);  
-  noFill();
-  let xoff2 = start;
-    for (let index = 0; index < width; index++) {
-      stroke(255);
-      let y = noise(xoff2) * height
-      vertex(index, y);  
-      xoff2 += 0.005;
+      xoff += 0.01;
     }
-  endShape();
+  }
+  updatePixels();
 
-  start += 0.02;
   // noLoop();
 }
