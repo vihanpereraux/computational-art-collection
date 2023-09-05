@@ -6,10 +6,11 @@ let playButton = document.getElementById('play-button');
 let isVideoPlaying = false;
 
 function setup() {
-  createCanvas(640, 440);
+  createCanvas(854, 480);
   video2 = createVideo('./samples/sample.mp4', videoReady);
-  video2.size(640, 480);
-  video2.pause();
+  video2.size(width, height);
+  video2.loop();
+  video2.volume(0);
 }
 
 playButton.addEventListener('click', function(){
@@ -26,6 +27,7 @@ playButton.addEventListener('click', function(){
   }
 });
 
+
 function videoReady() {
   detector = ml5.objectDetector('cocossd', modelReady);
 }
@@ -39,24 +41,23 @@ function gotDetections(error, results) {
     console.error(error);
   }
   detections = results;
-  // console.log(
-  //   results[0].width, 
-  //   results[0].height,
-  //   results[0].x,
-  //   results[0].y);
-
   detector.detect(video2, gotDetections);
 }
 
 function draw() {
-  image(video2, 0, 0, 640, 480);
-  // console.log(detections);
+  image(video2, 0, 0, width, height);
   for (let i = 0; i < detections.length; i += 1) {
     const object = detections[i];
     stroke(0, 255, 0);
     strokeWeight(4);
     noFill();
-    rect(object.x, object.y, object.width, object.height);
+    rect(
+      object.x, 
+      object.y, 
+      object.width, 
+      object.height);
+
+    // labels
     noStroke();
     fill(255);
     textSize(24);
