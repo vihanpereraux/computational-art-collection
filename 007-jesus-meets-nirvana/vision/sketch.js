@@ -18,6 +18,12 @@ function setup() {
   video2.loop();
   video2.volume(0);
   video2.hide();
+
+  localStorage.setItem("eyes", "false");
+  localStorage.setItem("ears", "false");
+  localStorage.setItem("nose", "false");
+  localStorage.setItem("tongue", "false");
+  localStorage.setItem("body/touch", "flase");
 }
 
 playButton.addEventListener('click', function(){
@@ -50,9 +56,35 @@ function gotDetections(error, results) {
 
 function draw() {
   image(video2, 0, 0, width, height);
+
+  // 5 senses catog
+  // women/men - eyes, body
+  // sounds - ear
+  // food - tongue
+  // perfume - nose
   
   // bounderies
   for (let i = 0; i < detections.length; i += 1) {
+    // updating local storage
+    switch (detections[i].label) {
+      case "person":
+        localStorage.setItem("eyes", "true");
+        localStorage.setItem("ears", "false");
+        localStorage.setItem("nose", "false");
+        localStorage.setItem("tongue", "false");
+        localStorage.setItem("body/touch", "true");  
+        break;
+    
+      case "car":
+        localStorage.setItem("eyes", "true");  
+        localStorage.setItem("ears", "false");
+        localStorage.setItem("nose", "false");
+        localStorage.setItem("tongue", "false");
+        localStorage.setItem("body/touch", "flase");
+        break;
+      
+    }
+
     const object = detections[i];
     stroke(0, 255, 0);
     strokeWeight(2);
@@ -63,26 +95,26 @@ function draw() {
       object.width, 
       object.height);
 
-  // labels
-  noStroke();
-  fill(255);
-  textSize(12);
-  text(object.label, object.x + 10, object.y + 24);
-  text(round(object.confidence, 5), object.x + object.width/2, object.y + object.height/2);
+    // labels
+    noStroke();
+    fill(255);
+    textSize(12);
+    text(object.label, object.x + 10, object.y + 24);
+    text(round(object.confidence, 5), object.x + object.width/2, object.y + object.height/2);
 
-  // lines
-  let lolz = Math.round(random(0, detections.length - 1));
-  let lolz1 = Math.round(random(0, detections.length - 1));
-  if(detections.length > 1){
-    console.log(detections)
-    stroke(255);
-    strokeWeight(1.5);
-    line(
-      (detections[lolz1].width)/2 + detections[lolz1].x, 
-      (detections[lolz1].height)/2 + detections[lolz1].y,
-      (detections[lolz].width)/2 + detections[lolz].x, 
-      (detections[lolz].height)/2, + detections[lolz].y)
-    }
+    // lines
+    let lolz = Math.round(random(0, detections.length - 1));
+    let lolz1 = Math.round(random(0, detections.length - 1));
+    if(detections.length > 1){
+      console.log(detections);
+      stroke(255);
+      strokeWeight(1.5);
+      line(
+        (detections[lolz1].width)/2 + detections[lolz1].x, 
+        (detections[lolz1].height)/2 + detections[lolz1].y,
+        (detections[lolz].width)/2 + detections[lolz].x, 
+        (detections[lolz].height)/2, + detections[lolz].y)
+      }
   }
 
   // stat

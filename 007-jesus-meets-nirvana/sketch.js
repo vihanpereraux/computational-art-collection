@@ -1,118 +1,95 @@
 let test = document.getElementById('test');
-let test2 = document.getElementById('test2');
-let video;
-let video2;
-let detector;
-let detections = [];
-let stat = document.getElementById('stat');
-let playButton = document.getElementById('play-button');
-let isVideoPlaying = false;
+let images = [];
+let img; 
+let imageSize;
 
+let ears1;
+let ears2;
+let tongue;
+let eyes1; 
+let eyes2; 
 
-// canvas 01
-function setup() {
-  let customCanvas = createCanvas(854, 480);
+function preload(){
+  for (let i = 0; i < 6; i++) {
+    img = loadImage('./samples/images/image_0' + String(i + 1) + '.png');
+    images.push(img)
+  }
+}
+
+function setup(){
+  frameRate(10);
+  let customCanvas = createCanvas(500, window.innerHeight - 20);
   customCanvas.parent('test');
-  video2 = createVideo('./samples/sample.mp4', videoReady);
-  video2.size(width, height);
-  video2.loop();
-  video2.volume(0);
-  video2.hide();
+
+  noFill();
+  noStroke(255);
+  rect(0, 0, width, height)
+
+  ears1 = {x: 200, y: height * 0.3}
+  ears2 = {x: 300, y: height * 0.3}
+  tongue = {x: 250, y: height * 0.37}
+  eyes1 = {x: 220, y: height * 0.25}
+  eyes2 = {x: 290, y: height * 0.25}
 }
 
-playButton.addEventListener('click', function(){
-  if(!isVideoPlaying){
-    isVideoPlaying = true;
-    playButton.innerText = "Pause";
-    video2.play();
-    video2.loop();
-  }
-  else{
-    isVideoPlaying = false;
-    playButton.innerText = "Play";
-    video2.pause();
-  }
-});
+function draw(){
+  clear();
 
-function videoReady() {
-  detector = ml5.objectDetector('cocossd', modelReady);
-}
-function modelReady() {
-  detector.detect(video2, gotDetections);
-}
-function gotDetections(error, results) {
-  if (error) {
-    console.error(error);
-  }
-  detections = results;
-  detector.detect(video2, gotDetections);
-}
+  // Effect A
+  noFill();
+  stroke(255);
+  // circle(250, height * 0.25, 248);
 
-function draw() {
-  image(video2, 0, 0, width, height);
-  
-  // bounderies
-  for (let i = 0; i < detections.length; i += 1) {
-    const object = detections[i];
-    stroke(0, 255, 0);
-    strokeWeight(2);
+    // ears
+    fill(255);
+    circle(ears1.x, ears1.y, 5);
+    circle(ears2.x, ears2.y, 5);
+
+    // tongue
+    circle(tongue.x, tongue.y, 5);
+
+    // eyes
+    circle(eyes1.x, eyes1.y, 5);
+    circle(eyes2.x, eyes2.y, 5);
+
+    // touch
+    circle(100, height * 0.36, 5);
+
+    let pointOne = {x:100, y:height * 0.36}
+    let pointTwo = {x:200, y:height * 0.3}
+    let pointThree = {x:250, y:height * 0.37}
+
+    let cordPool1 = [
+      {x: eyes1.x, y: eyes1.y},
+      {x: eyes2.x, y: eyes2.y},
+    ];
+
+    // triangle(
     noFill();
-    rect(
-      object.x, 
-      object.y, 
-      object.width, 
-      object.height);
-
-  // labels
-  noStroke();
-  fill(255);
-  textSize(12);
-  text(object.label, object.x + 10, object.y + 24);
-  text(round(object.confidence, 5), object.x + object.width/2, object.y + object.height/2);
-
-  // lines
-  let lolz = Math.round(random(0, detections.length - 1));
-  let lolz1 = Math.round(random(0, detections.length - 1));
-  if(detections.length > 1){
-    console.log(detections)
-    stroke(255);
-    strokeWeight(1.5);
-    line(
-      (detections[lolz1].width)/2 + detections[lolz1].x, 
-      (detections[lolz1].height)/2 + detections[lolz1].y,
-      (detections[lolz].width)/2 + detections[lolz].x, 
-      (detections[lolz].height)/2, + detections[lolz].y)
+    if(localStorage.getItem('body/touch') == 'true'){
+      let randomVal = round(random(0, cordPool1.length-1)); 
+      console.log(randomVal);
+      triangle(
+        pointOne.x, pointOne.y,
+        // 200, height * 0.3,
+        cordPool1[randomVal].x, cordPool1[randomVal].y,
+        pointThree.x, pointThree.y);
     }
-  }
-
-  // stat
-  if(detections.length > 1){
-    for (let i = 0; i < detections.length; i += 1) {
-      let varName = String(round(random(0, 100)));
-      varName = document.createElement('p');
-      stat.appendChild(varName);
-      varName.innerText = 
-      round(detections[i].x, 3) 
-      + " - " + 
-      round(detections[i].y, 3)
-      + " - " + 
-      round(detections[i].confidence, 3);
+    else{
+      noStroke();
+      triangle(
+        100, height * 0.36,
+        200, height * 0.3,
+        250, height * 0.37
+      );
     }
-  }
+
+  // Effect B
+  imageSize = 145;
+  image(
+    images[round(random(0, 5))], 
+    250, 
+    height * .6, 
+    imageSize, 
+    imageSize);
 }
-
-
-// canvas 02
-var s2 = function( sketch ) {
-  sketch.setup = function() {
-   let canvas2 = sketch.createCanvas(520, window.innerHeight);
-   canvas2.parent('test2');
- }
-
- sketch.draw = function() {
-  sketch.noFill();
-  sketch.stroke(255)
-  sketch.rect(0, 0, sketch.width, sketch.height);
- }
-};
-new p5(s2);
