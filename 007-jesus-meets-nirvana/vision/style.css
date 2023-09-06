@@ -1,0 +1,50 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  background: black !important;
+  overflow: hidden;
+}
+
+canvas {
+  display: block;
+}
+
+
+#play-button{
+  cursor: pointer;
+  position: absolute;
+  z-index: 3;
+  top: 2%;
+  right: 2%;
+  width: 100px;
+  height: 45px;
+  text-transform: uppercase;
+  z-index: 1000 !important;
+}
+#test{
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  z-index: 3;
+}
+#test canvas{
+  width: calc(854px) !important;
+  height: calc(480px) !important;
+}
+
+
+#stat{
+  position: absolute;
+  width: 300px;
+  height: 100vh;
+  background: none;
+  top: 0;
+  left: 2%;
+  z-index: 3;
+  color: white;
+  overflow-y: auto;
+}
+#stat::-webkit-scrollbar{
+  display: none;
+}
