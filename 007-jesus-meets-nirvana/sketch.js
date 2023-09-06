@@ -1,13 +1,15 @@
 let test = document.getElementById('test');
+let test2 = document.getElementById('test2');
 let video;
 let video2;
 let detector;
 let detections = [];
 let stat = document.getElementById('stat');
-stat.scrollIntoView(false);
 let playButton = document.getElementById('play-button');
 let isVideoPlaying = false;
 
+
+// canvas 01
 function setup() {
   let customCanvas = createCanvas(854, 480);
   customCanvas.parent('test');
@@ -17,7 +19,6 @@ function setup() {
   video2.volume(0);
   video2.hide();
 }
-
 
 playButton.addEventListener('click', function(){
   if(!isVideoPlaying){
@@ -32,7 +33,6 @@ playButton.addEventListener('click', function(){
     video2.pause();
   }
 });
-
 
 function videoReady() {
   detector = ml5.objectDetector('cocossd', modelReady);
@@ -100,3 +100,19 @@ function draw() {
     }
   }
 }
+
+
+// canvas 02
+var s2 = function( sketch ) {
+  sketch.setup = function() {
+   let canvas2 = sketch.createCanvas(520, window.innerHeight);
+   canvas2.parent('test2');
+ }
+
+ sketch.draw = function() {
+  sketch.noFill();
+  sketch.stroke(255)
+  sketch.rect(0, 0, sketch.width, sketch.height);
+ }
+};
+new p5(s2);

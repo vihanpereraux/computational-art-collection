@@ -6,7 +6,7 @@
     <style>
         body {
             margin: 0;
-            background-color: #000;
+            background: none !important;
             color: #fff;
             font-family: Helvetica, Arial, sans-serif;
             overflow: hidden; /* disable scrolling / rubberband effect on mobile */
@@ -17,6 +17,14 @@
             display: block;
             position: absolute;
             outline:0;
+        }
+
+        .playButton{
+            position: absolute !important;
+            transform: translate(-50%, -50%) !important;
+            left: 50% !important;
+            top: 50% !important;
+            z-index: 1000 !important;
         }
 
         * {
