@@ -20,7 +20,7 @@ function setup() {
   video2.hide();
 
   localStorage.setItem("eyes", "false");
-  localStorage.setItem("ears", "false");
+  localStorage.setItem("ears", "true");
   localStorage.setItem("nose", "false");
   localStorage.setItem("tongue", "false");
   localStorage.setItem("body/touch", "flase");
@@ -69,7 +69,7 @@ function draw() {
     switch (detections[i].label) {
       case "person":
         localStorage.setItem("eyes", "true");
-        localStorage.setItem("ears", "false");
+        localStorage.setItem("ears", "true");
         localStorage.setItem("nose", "false");
         localStorage.setItem("tongue", "false");
         localStorage.setItem("body/touch", "true");  
@@ -77,7 +77,7 @@ function draw() {
     
       case "car":
         localStorage.setItem("eyes", "true");  
-        localStorage.setItem("ears", "false");
+        localStorage.setItem("ears", "true");
         localStorage.setItem("nose", "false");
         localStorage.setItem("tongue", "false");
         localStorage.setItem("body/touch", "flase");
