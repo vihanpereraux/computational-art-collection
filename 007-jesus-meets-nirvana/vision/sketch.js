@@ -99,7 +99,9 @@ function draw() {
     noStroke();
     fill(255);
     textSize(12);
-    text(object.label, object.x + 10, object.y + 24);
+    let gg = " "
+    if(object.label == 'person'){gg = 'human[m/f]'}
+    text(gg, object.x + 10, object.y + 24);
     text(round(object.confidence, 5), object.x + object.width/2, object.y + object.height/2);
 
     // lines
