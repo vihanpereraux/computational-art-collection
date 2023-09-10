@@ -1,8 +1,18 @@
 html, body {
   margin: 0;
   padding: 0;
+  background: black;
 }
 
 canvas {
   display: block;
+}
+
+video{
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 360px;
+  height: 640px;
+  z-index: -1;
 }

@@ -7,6 +7,7 @@ let canvasVideo;
 let detections = [];
 
 function setup() {
+  frameRate(30);
   let myCanvas =  createCanvas(360, 640);
   myCanvas.position((window.innerWidth - width)/2, (window.innerHeight - height)/2)
   socket = io.connect('http://localhost:3000/');
@@ -14,7 +15,8 @@ function setup() {
   let d = "Vihan";
   socket.emit('mouse', d);
 
-  canvasVideo = createVideo('./videos/video_01.mp4');
+  canvasVideo = createVideo('./videos/overview.mp4');
+  canvasVideo.id('oaka')
   canvasVideo.loop();
   canvasVideo.volume(0);
   canvasVideo.hide();
@@ -55,7 +57,8 @@ function getDetections(error, results){
 
 
 function draw() {
-  image(canvasVideo, 0, 0, width, height)
+  image(canvasVideo, 0, 0, width, height);
+  // image(canvasVideo, random(-10, 10), 0, width*random(0,1.5), height);
 
   for (let i = 0; i < detections.length; i++) {
     let currentObject = detections[i];
