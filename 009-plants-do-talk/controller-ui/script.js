@@ -1,6 +1,10 @@
 let socket;
 
+let playbackRate;
+let xAxisRange;
+let yAxisRange;
+
 socket = io.connect('http://localhost:3000/');
-socket.on('mouse', function(data){
-    console.log(data)
-})
+let d = "Vihan";
+socket.emit('mouse', d);
+
