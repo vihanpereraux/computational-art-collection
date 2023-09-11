@@ -5,6 +5,7 @@ let videoPaused = true;
 let objectDetector;
 let canvasVideo;
 let detections = [];
+let values;
 
 let xAxisRange;
 let widthRange;
@@ -18,8 +19,20 @@ function setup() {
   myCanvas.position((window.innerWidth - width)/2, (window.innerHeight - height)/2)
   
   socket = io.connect('http://172.20.10.3:3000/');
+  
+  values = {
+    playBackRateValue: 0,
+    xAxisRangeValue: 0,
+    widthRangeValue: 1,
+    opacityRangeValue: 255,
+  }
   socket.on('mouse', function(data){
-    console.log(data)
+    values.playBackRateValue = data.playBackRateValue;
+    values.xAxisRangeValue = data.xAxisRangeValue;
+    values.widthRangeValue = data.widthRangeValue;
+    values.opacityRangeValue = data.opacityRangeValue;
+      
+    console.log(values);
   })
 
   xAxisRange = document.getElementById("x-axis-range");
@@ -72,21 +85,26 @@ function draw() {
     {x: width, y: height},
   ];
 
-  let xAxisRangeValue = xAxisRange.value;
-  let widthRangeValue = widthRange.value;
+  let xAxisRangeValue = values.xAxisRangeValue;
+  let widthRangeValue = values.widthRangeValue;
   let opacityRangeValue = opacityRange.value;
+  
+  // data.playBackRateValue;
+  // data.xAxisRangeValue;
+  // data.widthRangeValue;
+  // data.opacityRangeValue;
 
   image(
     canvasVideo, 
-    random(-xAxisRangeValue, xAxisRangeValue), 
+    random(-values.xAxisRangeValue, values.xAxisRangeValue), 
     0, 
-    width * random(1, widthRangeValue), 
+    width * random(1, values.widthRangeValue), 
     height);
   // image(canvasVideo, random(-10, 10), 0, width*random(0,1.5), height);
   // image(canvasVideo, 0, 0, width, height);
 
   // tint
-  tint(255, int(opacityRangeValue));
+  tint(255, int(values.opacityRangeValue));
 
   for (let i = 0; i < detections.length; i++) {
     let currentObject = detections[i];
