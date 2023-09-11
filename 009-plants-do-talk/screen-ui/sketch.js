@@ -17,7 +17,7 @@ function setup() {
   let myCanvas =  createCanvas(360, 640);
   myCanvas.position((window.innerWidth - width)/2, (window.innerHeight - height)/2)
   
-  socket = io.connect('http://localhost:3000/');
+  socket = io.connect('http://172.20.10.3:3000/');
   socket.on('mouse', function(data){
     console.log(data)
   })

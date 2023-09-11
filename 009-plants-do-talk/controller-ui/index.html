@@ -24,7 +24,12 @@
         <div class="row">
             <div class="col-md-4 col-lg-4 column">
                 <div id="controllers">
-                    <label style="color: white;">play-back rate</label>
+                    <div style="display: flex; color: white;">
+                        <label class="label">play-back rate</label>
+                        <span>[ </span>
+                            <p class="value" id="play-back-rate-value"></p>
+                        <span> ]</span>
+                    </div>
                     <input 
                         type="range" 
                         min="1" 
@@ -34,7 +39,12 @@
                         class="slider"
                         id="playback-rate"><br>
                 
-                    <label style="color: white;">x axis range</label>
+                    <div style="display: flex; color: white;">
+                        <label class="label">x axis range</label>
+                        <span>[ </span>
+                            <p class="value" id="x-axis-range-value"></p>
+                        <span> ]</span>
+                    </div>
                     <input 
                         type="range" 
                         min="1" 
@@ -44,7 +54,12 @@
                         class="slider"
                         id="x-axis-range"><br>
                 
-                    <label style="color: white;">width range</label>
+                    <div style="display: flex; color: white;">
+                        <label class="label">width range</label>
+                        <span>[ </span>
+                            <p class="value" id="width-range-value"></p>
+                        <span> ]</span>
+                    </div>
                     <input 
                         type="range" 
                         min="1" 
@@ -54,15 +69,20 @@
                         class="slider"
                         id="width-range"><br>
                     
-                    <label style="color: white;">opacity value</label>
+                    <div style="display: flex; color: white;">
+                        <label class="label">opacity range</label>
+                        <span>[ </span>
+                            <p class="value" id="opacity-range-value"></p>
+                        <span> ]</span>
+                    </div>
                     <input 
                         type="range" 
-                        min="1" 
-                        max="10" 
-                        value="1" 
-                        step="0.1"
+                        min="0" 
+                        max="255" 
+                        value="255" 
+                        step="0.5"
                         class="slider"
-                        id="width-range"><br>
+                        id="opacity-range"><br>
                 </div>
             </div>
             <div class="col-md-4 col-lg-4 column"></div>

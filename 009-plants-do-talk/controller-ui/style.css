@@ -12,9 +12,16 @@ html, body {
     border-right: 1px solid white;
 }
 
+.label{
+    color: white;
+    margin-right: 40px;
+}   
+.value{
+    color: white;
+}
 .slider{
     width: 100%;
-    margin-top: 10px;
+    margin-top: 0px;
     margin-bottom: 20px;
   }
   
