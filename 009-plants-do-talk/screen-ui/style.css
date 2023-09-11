@@ -8,11 +8,26 @@ canvas {
   display: block;
 }
 
-video{
+#oaka{
   position: absolute;
   left: 0;
   top: 0;
   width: 360px;
   height: 640px;
   z-index: -1;
+}
+
+#controllers{
+  position: absolute;
+  right: 0;
+  width: 300px;
+  background: none;
+}
+#playback-rate{
+  width: 90%;
+}
+.slider{
+  width: 90%;
+  margin-top: 10px;
+  margin-bottom: 20px;
 }
