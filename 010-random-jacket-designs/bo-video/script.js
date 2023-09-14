@@ -18,8 +18,10 @@ function setup() {
   customCanvas.position((window.innerWidth - width)/2, (window.innerHeight - height)/2)
   
   // setup p5 capture
-  myCapture = createVideo('./overview2.mp4');
+  myCapture = createVideo('./videos/video_02.mp4');
   myCapture.size(360, 640);
+  myCapture.loop();
+  myCapture.id('feed');
 //   myCapture.hide();
   
   // wait for OpenCV to init
@@ -45,13 +47,13 @@ function draw() {
     // read from CV Capture into myMat
     myCVCapture.read(myMat);
     // convert to from RGBA to RGB
-    p5.cv.convertColor(myMat, myMatRGB, cv.COLOR_RGB2HLS);
+    p5.cv.convertColor(myMat, myMatRGB, cv.COLOR_RGB2HSV);
     // Compute the absolute difference of the red, green, and blue channels
     // subtract myBackgroundMat from myMat and store result
     cv.absdiff(myMatRGB, myBackgroundMat, differenceMat);
     // display difference Mat
     p5.cv.drawMat(differenceMat, 0, 0, width, height);
-    tint(255, 50);
+    tint(255, 20);
     // Add these differences to the running tally
     presenceSum = p5.cv.sumData(differenceMat.data);
     // Print out the total amount of movement
@@ -60,10 +62,18 @@ function draw() {
   }
 }
 
+setInterval(() => {
+  if (p5.cv.isReady){
+    p5.cv.copyRGB(myMat, myBackgroundMat);
+  }
+}, 1000);
+
+
 // When a key is pressed, capture the background image into the backgroundPixels
 // buffer, by copying each of the current frame's pixels into it.
 function keyPressed() {
   if (p5.cv.isReady) {
-    p5.cv.copyRGB(myMatRGB, myBackgroundMat);
+    myCapture.time(round(random(0, 9)));
+    p5.cv.copyRGB(myMat, myBackgroundMat);
   }
 }
