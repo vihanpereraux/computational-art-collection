@@ -21,6 +21,7 @@ function setup() {
   myCapture = createVideo('./videos/video_02.mp4');
   myCapture.size(360, 640);
   myCapture.loop();
+  myCapture.volume(0);
   myCapture.id('feed');
 //   myCapture.hide();
   
@@ -66,7 +67,7 @@ setInterval(() => {
   if (p5.cv.isReady){
     p5.cv.copyRGB(myMat, myBackgroundMat);
   }
-}, 1000);
+}, 400);
 
 
 // When a key is pressed, capture the background image into the backgroundPixels
