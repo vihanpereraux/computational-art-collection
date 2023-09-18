@@ -15,10 +15,14 @@ canvas {
   width: 360px;
   height: 640px;
   z-index: -1;
+  
+  transform: rotateY(180deg);
+  -webkit-transform:rotateY(180deg); /* Safari and Chrome */
+  -moz-transform:rotateY(180deg); /* Firefox */
 }
 
 #controllers{
-  display: none;
+  display: block;
   position: absolute;
   right: 0;
   width: 300px;
