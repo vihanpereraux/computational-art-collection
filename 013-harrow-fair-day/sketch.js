@@ -11,7 +11,7 @@ function setup() {
     (window.innerWidth - width)/2, 
     (window.innerHeight - height)/2);
 
-  footageOne = createVideo('./videos/paka.mp4');
+  footageOne = createVideo('./videos/clip07.mp4');
   footageOne.size(width, height); 
   footageOne.id('footage-one')
   footageOne.volume(0);
