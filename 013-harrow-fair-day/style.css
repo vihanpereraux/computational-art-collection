@@ -1,8 +1,33 @@
 html, body {
   margin: 0;
   padding: 0;
+  background: black;
 }
 
 canvas {
+  position: relative;
   display: block;
+  z-index: 1000;
 }
+
+#detect-btn{
+
+}
+
+#footage-one{
+  position: absolute;
+  width: calc(1080px/ 3) !important;
+  height: calc(1920px/ 3) !important;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* #footage-two{
+  position: absolute;
+  width: calc(1080px/ 3) !important;
+  height: calc(1920px/ 3) !important;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+} */
