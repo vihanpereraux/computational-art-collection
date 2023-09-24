@@ -1,4 +1,6 @@
 let devider = 3;
+let footages = [];
+let currentFootage;
 let footageOne;
 let footageTwo;
 let glitches = [];
@@ -8,6 +10,7 @@ let isAudioPlaying = false;
 let isTimelineSkip = false;
 let detectButton = document.getElementById('detect-btn');
 let timeline = document.getElementById('timeline');
+let changerButton = document.getElementById('changer-btn');
 
 function preload(){
   for (let i = 0; i < 20; i++) {
@@ -33,11 +36,38 @@ function setup() {
   footageOne.size(width, height); 
   footageOne.id('footage-one')
   footageOne.volume(0);
+
+  footageTwo = createVideo('./videos/clip01.mp4');
+  footageTwo.size(width, height); 
+  footageTwo.id('footage-two')
+  footageTwo.volume(0);
   // footageOne.showControls();
-  // footageOne.hide();
+
+  footages = [footageOne, footageTwo]
 }
 
 
+currentFootage = footages[0];
+changerButton.addEventListener('click', function(){
+  currentFootage = random(footages);
+  console.log(currentFootage.elt.id);
+
+  switch (String(currentFootage.elt.id)) {
+    case 'footage-one':
+      document.getElementById('footage-one').style.display = 'block';
+      footageTwo.hide();
+      break;
+  
+    case 'footage-two':
+      footageOne.hide();
+      document.getElementById('footage-two').style.display = 'block';
+      break;
+  
+    default:
+      break;
+  }
+  
+})
 detectButton.addEventListener('click', function(){
   initialDetector();
   footageOne.play();
@@ -69,13 +99,15 @@ function getDetections(error, results) {
   //   btnclicked = true;
   // });
   if(btnclicked){
-    document.getElementById('footage-one').currentTime = round(random(0, 27));
+    document.getElementById('footage-one').currentTime = 
+      round(random(0, int(document.getElementById('footage-one').duration)));
     btnclicked = false;
     setTimeout(() => {
       objectDetector.detect(footageOne, getDetections);    
     }, 100);
   }
   else{
+    
     objectDetector.detect(footageOne, getDetections);
   }
 }
@@ -95,16 +127,17 @@ function draw() {
     console.log(isAudioPlaying);
   }
   
+  // tint(255, 70);
   // image(footageOne, 0, 0, width, height);
   // document.getElementById('footage-one').currentTime(int(document.getElementById('timeline').value));
 
   for (let i = 0; i < detections.length; i++) {
-    console.log(detections[i].x, detections[i].y);
+    console.log(detections[i].label ,detections[i].x, detections[i].y);
     let object = detections[i];
 
     noFill();
     stroke(255, 255, 255);
-    strokeWeight(2);    
+    strokeWeight(1.5);    
     rect(
       (object.x / 540)*360, 
       (object.y / 540)*360, 
