@@ -183,12 +183,30 @@ function getDetections(error, results) {
 
 
 function draw() {
+  document.getElementById('stat').
+    scrollTo(0, document.getElementById('stat').scrollHeight);
+  
+  document.getElementById('audio-stat').
+    scrollTo(0, document.getElementById('stat').scrollHeight);
+
   clear();
+
+  document.getElementById('name').innerText = localStorage.getItem('currentlyPlaying');
+  
   console.log(isTimelineSkip);
   if(isTimelineSkip){
     if(glitches[randomNumber].isPlaying()){
       isAudioPlaying = true;
       btnclicked = true;
+
+      console.log(glitches[randomNumber]);
+
+      let glitchData = document.createElement('p');
+      glitchData.innerText = 
+        String(glitches[randomNumber].file) 
+        + " , " +
+        String(glitches[randomNumber].buffer.duration); 
+      document.getElementById('audio-stat').appendChild(glitchData);
     }
     else{
       isAudioPlaying = false
@@ -203,6 +221,15 @@ function draw() {
   for (let i = 0; i < detections.length; i++) {
     console.log(detections[i].label ,detections[i].x, detections[i].y);
     let object = detections[i];
+
+    let paka = document.createElement("p");
+    paka.innerText = 
+      object.label + "[" + object.confidence + "]" + 
+      " , " + 
+      object.x + 
+      " , " + 
+      object.y;
+    document.getElementById('stat').appendChild(paka);
 
     noFill();
     stroke(255, 255, 255);

@@ -10,8 +10,46 @@ canvas {
   z-index: 1000;
 }
 
-#detect-btn{
+#controllers-wrapper{
+  padding-left: 2%;
+  padding-top: 2%;
+}
 
+#stat{
+  width: 400px;
+  height: 100vh;
+  overflow-y: auto;
+  background: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: white;
+  text-transform: capitalize;
+}
+#stat::-webkit-scrollbar{
+  display: none !important;
+}
+
+#audio-stat{
+  width: 300px;
+  height: 500px;
+  position: absolute;
+  bottom: 0;
+  left: 2%;
+  background: none;
+  overflow-y: auto;
+  color: rgb(0, 194, 0);
+}
+#audio-stat::-webkit-scrollbar{
+  display: none;
+}
+
+#feed-stat{
+  text-transform: uppercase;
+  position: absolute;
+  left: 2%;
+  top: 15%;
+  color: white;
 }
 
 #footage-one{

@@ -14,14 +14,17 @@
   </head>
 
   <body>
-    <button id="detect-btn">detect</button>
-    <button id="changer-btn">change</button>
-    <button id="play-btn">play</button>
-    <button id="skip-btn">skip</button>
+    <div id="controllers-wrapper">
+      <button id="detect-btn">Detect</button>
+      <button id="changer-btn">Switch Feed</button>
+      <button id="play-btn">Play</button>
+      <button id="skip-btn">Skip</button>
+      <button onclick="window.location.reload();">Refresh</button>
+    </div>
 
-    <!-- <video controls id="footage-two" src="./videos/paka.mp4"></video> -->
-    <br><br>
-    <input type="range" min="0" max="25" value="0" id="timeline">
+    <div id="stat"></div>
+    <div id="feed-stat"><p id="name"></p></div>
+    <div id="audio-stat"></div>
 
     <script src="sketch.js"></script>
     <!-- <script src="./dummy.js"></script> -->
