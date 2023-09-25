@@ -123,7 +123,7 @@ detectButton.addEventListener('click', function(){
   let glitchInterval = setInterval(() => {
     randomNumber = int(round(random(0, glitches.length - 1)));
     glitches[randomNumber].play();
-    glitches[randomNumber].setVolume(.5);
+    glitches[randomNumber].setVolume(1);
   }, 2500);
 }); 
 function initialDetector() {
@@ -183,6 +183,7 @@ function getDetections(error, results) {
 
 
 function draw() {
+  // set scroll postion to the bottom of the div
   document.getElementById('stat').
     scrollTo(0, document.getElementById('stat').scrollHeight);
   document.getElementById('audio-stat').
@@ -200,6 +201,27 @@ function draw() {
       isAudioPlaying = true;
       btnclicked = true;
 
+      switch (localStorage.getItem('currentlyPlaying')) {
+        case 'footage-one':
+          document.getElementById('footage-one').style.filter = 'grayscale(0)';
+          break;
+
+        case 'footage-two':
+            document.getElementById('footage-two').style.filter = 'grayscale(0)';
+            break;
+
+        case 'footage-three':
+          document.getElementById('footage-three').style.filter = 'grayscale(0)';
+          break;
+
+        case 'footage-four':
+          document.getElementById('footage-four').style.filter = 'grayscale(0)';
+          break;
+      
+        default:
+          break;
+      }
+
       // audio stat
       let glitchData = document.createElement('p');
       glitchData.innerText = 
@@ -209,6 +231,10 @@ function draw() {
       document.getElementById('audio-stat').appendChild(glitchData);
     }
     else{
+      document.getElementById('footage-one').style.filter = 'grayscale(0)';
+      document.getElementById('footage-two').style.filter = 'grayscale(0)';
+      document.getElementById('footage-three').style.filter = 'grayscale(0)';
+      document.getElementById('footage-four').style.filter = 'grayscale(0)';
       isAudioPlaying = false
     }
     console.log(isAudioPlaying);
@@ -220,6 +246,7 @@ function draw() {
 
   let detectionLength = detections.length;
 
+  // illustrations
   for (let i = 0; i < detections.length; i++) {
     console.log(detections[i].label ,detections[i].x, detections[i].y);
     let object = detections[i];
@@ -234,7 +261,6 @@ function draw() {
       object.y;
     document.getElementById('stat').appendChild(paka);
 
-    // illustrations
     noFill();
     stroke(255, 255, 255);
     strokeWeight(1.5);    
@@ -245,6 +271,22 @@ function draw() {
       20, 20
     );
 
+    fill(0,255, 0);
+    noStroke();
+    text(
+      round(object.confidence, 3), 
+      (object.x / 540) * 360 + ((object.width / 960)*640) / 2 - 15,
+      (object.y / 540) * 360 + ((object.height / 960)*640) / 2- 20
+    )
+
+    fill(255);
+    circle(
+      (object.x / 540) * 360 + ((object.width / 960)*640) / 2,
+      (object.y / 540) * 360 + ((object.height / 960)*640) / 2,
+      4
+    );
+
+    noFill();
     stroke(255);
     strokeWeight(1.5);
     let lol = round(random(0, detections.length-1));
