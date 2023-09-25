@@ -1,0 +1,11 @@
+OP AUTHORS:
+
+- ops by cables user pandur (https://cables.gl/user/pandur)
+- cables by undefined development (http://undev.studio)
+- glmatrix by toji (https://github.com/toji/gl-matrix)
+- Photoshop math GLSL shaders by Romain Dura (https://mouaif.wordpress.com/2009/01/05/photoshop-math-with-glsl-shaders/)
+- Voronoise Shader by Patricio Gonzalez Vivo & Jen Lowe (https://thebookofshaders.com/12/)
+- ops by cables user tim (https://cables.gl/user/tim)
+- ops by cables user simod (https://cables.gl/user/simod)
+
+cables is build on open source software and community contributions, check https://cables.gl/credits

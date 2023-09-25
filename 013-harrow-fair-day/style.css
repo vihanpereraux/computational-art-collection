@@ -15,6 +15,16 @@ canvas {
   padding-top: 2%;
 }
 
+#cables-effect{
+  display: none;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  top: 50%;
+  width: calc(1080px/ 3) !important;
+  height: calc(1920px/ 3) !important;
+}
+
 #stat{
   width: 400px;
   height: 100vh;

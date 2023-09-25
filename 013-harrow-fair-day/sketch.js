@@ -13,6 +13,10 @@ let isTimelineSkip = false;
 let detectButton = document.getElementById('detect-btn');
 let timeline = document.getElementById('timeline');
 let changerButton = document.getElementById('changer-btn');
+let meshButton = document.getElementById('mesh-btn');
+let zIndexButton = document.getElementById('z-index-btn');
+let isMeshVisible = false;
+
 
 function preload(){
   for (let i = 0; i < 20; i++) {
@@ -62,7 +66,9 @@ function setup() {
   footages = [footageOne, footageTwo, footageThree, footageFour]
 }
 
-
+zIndexButton.addEventListener('click', function(){
+  // document.getElementById('cables-effect').style.zIndex = 999;
+});
 changerButton.addEventListener('click', function(){
   currentFootage = random(footages);
   console.log(currentFootage.elt.id);
@@ -111,7 +117,7 @@ changerButton.addEventListener('click', function(){
       break;
   }
   
-})
+});
 detectButton.addEventListener('click', function(){
   initialDetector();
   footageOne.play();
@@ -125,7 +131,16 @@ detectButton.addEventListener('click', function(){
     glitches[randomNumber].play();
     glitches[randomNumber].setVolume(1);
   }, 2500);
+});
+meshButton.addEventListener('click', function(){
+  if(isMeshVisible){
+    isMeshVisible = false;
+  }
+  else{
+    isMeshVisible = true;
+  }
 }); 
+
 function initialDetector() {
   objectDetector = ml5.objectDetector('cocossd', {}, modelLoaded);
 }
@@ -189,6 +204,38 @@ function draw() {
   document.getElementById('audio-stat').
     scrollTo(0, document.getElementById('stat').scrollHeight);
 
+  if(isMeshVisible){
+    document.getElementById('cables-effect').style.display = 'block';
+    // document.getElementById('cables-effect').style.zIndex = 1001;
+    document.getElementById('footage-one').style.display = 'none';
+    document.getElementById('footage-two').style.display = 'none';
+    document.getElementById('footage-three').style.display = 'none';
+    document.getElementById('footage-four').style.display = 'none';
+  }
+  else{
+    switch (localStorage.getItem('currentlyPlaying')) {
+      case 'footage-one':
+        document.getElementById('footage-one').style.display = 'block';
+        break;
+
+      case 'footage-two':
+        document.getElementById('footage-two').style.display = 'block';
+        break;
+
+      case 'footage-three':
+        document.getElementById('footage-three').style.display = 'block';
+        break;
+
+      case 'footage-four':
+        document.getElementById('footage-four').style.display = 'block';
+        break;
+    
+      default:
+        break;
+    }
+    document.getElementById('cables-effect').style.display = 'none';
+  }
+  
   clear();
 
   // audio stat
@@ -201,27 +248,6 @@ function draw() {
       isAudioPlaying = true;
       btnclicked = true;
 
-      switch (localStorage.getItem('currentlyPlaying')) {
-        case 'footage-one':
-          document.getElementById('footage-one').style.filter = 'grayscale(0)';
-          break;
-
-        case 'footage-two':
-            document.getElementById('footage-two').style.filter = 'grayscale(0)';
-            break;
-
-        case 'footage-three':
-          document.getElementById('footage-three').style.filter = 'grayscale(0)';
-          break;
-
-        case 'footage-four':
-          document.getElementById('footage-four').style.filter = 'grayscale(0)';
-          break;
-      
-        default:
-          break;
-      }
-
       // audio stat
       let glitchData = document.createElement('p');
       glitchData.innerText = 
@@ -231,10 +257,6 @@ function draw() {
       document.getElementById('audio-stat').appendChild(glitchData);
     }
     else{
-      document.getElementById('footage-one').style.filter = 'grayscale(0)';
-      document.getElementById('footage-two').style.filter = 'grayscale(0)';
-      document.getElementById('footage-three').style.filter = 'grayscale(0)';
-      document.getElementById('footage-four').style.filter = 'grayscale(0)';
       isAudioPlaying = false
     }
     console.log(isAudioPlaying);
@@ -244,8 +266,7 @@ function draw() {
   // image(footageOne, 0, 0, width, height);
   // document.getElementById('footage-one').currentTime(int(document.getElementById('timeline').value));
 
-  let detectionLength = detections.length;
-
+  // let detectionLength = detections.length;
   // illustrations
   for (let i = 0; i < detections.length; i++) {
     console.log(detections[i].label ,detections[i].x, detections[i].y);
