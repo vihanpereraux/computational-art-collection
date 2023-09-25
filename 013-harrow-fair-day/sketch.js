@@ -185,13 +185,14 @@ function getDetections(error, results) {
 function draw() {
   document.getElementById('stat').
     scrollTo(0, document.getElementById('stat').scrollHeight);
-  
   document.getElementById('audio-stat').
     scrollTo(0, document.getElementById('stat').scrollHeight);
 
   clear();
 
-  document.getElementById('name').innerText = localStorage.getItem('currentlyPlaying');
+  // audio stat
+  document.getElementById('name').innerText = 
+    localStorage.getItem('currentlyPlaying');
   
   console.log(isTimelineSkip);
   if(isTimelineSkip){
@@ -199,8 +200,7 @@ function draw() {
       isAudioPlaying = true;
       btnclicked = true;
 
-      console.log(glitches[randomNumber]);
-
+      // audio stat
       let glitchData = document.createElement('p');
       glitchData.innerText = 
         String(glitches[randomNumber].file) 
@@ -218,10 +218,13 @@ function draw() {
   // image(footageOne, 0, 0, width, height);
   // document.getElementById('footage-one').currentTime(int(document.getElementById('timeline').value));
 
+  let detectionLength = detections.length;
+
   for (let i = 0; i < detections.length; i++) {
     console.log(detections[i].label ,detections[i].x, detections[i].y);
     let object = detections[i];
 
+    // detection stat
     let paka = document.createElement("p");
     paka.innerText = 
       object.label + "[" + object.confidence + "]" + 
@@ -231,13 +234,25 @@ function draw() {
       object.y;
     document.getElementById('stat').appendChild(paka);
 
+    // illustrations
     noFill();
     stroke(255, 255, 255);
     strokeWeight(1.5);    
+
     rect(
-      (object.x / 540)*360, 
-      (object.y / 540)*360, 
-      (object.width / 960)*640, 
-      (object.height / 960)*640)
+      (object.x / 540) * 360 + ((object.width / 960)*640) / 2 - 10, 
+      (object.y / 540) * 360 + ((object.height / 960)*640) / 2 - 10,
+      20, 20
+    );
+
+    stroke(255);
+    strokeWeight(1.5);
+    let lol = round(random(0, detections.length-1));
+    line(
+      ((detections[lol].x) / 540) * 360 + ((detections[lol].width / 960)*640) / 2,
+      ((detections[lol].y) / 540) * 360 + ((detections[lol].height / 960)*640) / 2, 
+      (object.x / 540) * 360 + ((object.width / 960)*640) / 2, 
+      (object.y / 540) * 360 + ((object.height / 960)*640) / 2
+    );
   }
 }
