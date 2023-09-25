@@ -3,6 +3,8 @@ let footages = [];
 let currentFootage;
 let footageOne;
 let footageTwo;
+let footageThree;
+let footageFour;
 let glitches = [];
 let detections = [];
 let randomNumber;
@@ -31,6 +33,8 @@ function setup() {
   customCanvas.position(
     (window.innerWidth - width)/2, 
     (window.innerHeight - height)/2);
+  
+  localStorage.setItem('currentlyPlaying', 'footage-one');
 
   footageOne = createVideo('./videos/clip07.mp4');
   footageOne.size(width, height); 
@@ -41,26 +45,66 @@ function setup() {
   footageTwo.size(width, height); 
   footageTwo.id('footage-two')
   footageTwo.volume(0);
-  // footageOne.showControls();
+  footageTwo.hide();
 
-  footages = [footageOne, footageTwo]
+  footageThree = createVideo('./videos/clip03.mp4');
+  footageThree.size(width, height); 
+  footageThree.id('footage-three')
+  footageThree.volume(0);
+  footageThree.hide();
+
+  footageFour = createVideo('./videos/clip02.mp4');
+  footageFour.size(width, height); 
+  footageFour.id('footage-four')
+  footageFour.volume(0);
+  footageFour.hide();
+
+  footages = [footageOne, footageTwo, footageThree, footageFour]
 }
 
 
-currentFootage = footages[0];
 changerButton.addEventListener('click', function(){
   currentFootage = random(footages);
   console.log(currentFootage.elt.id);
 
   switch (String(currentFootage.elt.id)) {
     case 'footage-one':
-      document.getElementById('footage-one').style.display = 'block';
       footageTwo.hide();
+      footageThree.hide();
+      footageFour.hide();
+      localStorage.setItem('currentlyPlaying', 'footage-one');
+      document.getElementById('footage-one').style.display = 'block';
+      currentFootage = footages[0];
       break;
   
     case 'footage-two':
       footageOne.hide();
+      footageThree.hide();
+      footageFour.hide();
+      localStorage.setItem('currentlyPlaying', 'footage-two');
       document.getElementById('footage-two').style.display = 'block';
+      footageTwo.play();
+      currentFootage = footages[1];
+      break;
+
+    case 'footage-three':
+      footageOne.hide();
+      footageTwo.hide();
+      footageFour.hide();
+      localStorage.setItem('currentlyPlaying', 'footage-three');
+      footageThree.play();
+      document.getElementById('footage-three').style.display = 'block';
+      currentFootage = footages[2];
+      break;
+
+    case 'footage-four':
+      footageOne.hide();
+      footageTwo.hide();
+      footageThree.hide();
+      localStorage.setItem('currentlyPlaying', 'footage-four');
+      footageFour.play();
+      document.getElementById('footage-four').style.display = 'block';
+      currentFootage = footages[3];
       break;
   
     default:
@@ -71,6 +115,7 @@ changerButton.addEventListener('click', function(){
 detectButton.addEventListener('click', function(){
   initialDetector();
   footageOne.play();
+  
   setTimeout(() => {
     isTimelineSkip = true;
   }, 3000);
@@ -86,7 +131,8 @@ function initialDetector() {
 }
 function modelLoaded() {
   console.log('Model Loaded!');
-  objectDetector.detect(footageOne, getDetections);
+  currentFootage = footages[0];
+  objectDetector.detect(currentFootage, getDetections);
 }
 let btnclicked = false;
 function getDetections(error, results) {
@@ -99,16 +145,39 @@ function getDetections(error, results) {
   //   btnclicked = true;
   // });
   if(btnclicked){
-    document.getElementById('footage-one').currentTime = 
-      round(random(0, int(document.getElementById('footage-one').duration)));
+    switch (localStorage.getItem('currentlyPlaying')) {
+      case 'footage-one':
+        document.getElementById('footage-one').currentTime = 
+          round(random(0, int(document.getElementById('footage-one').duration)));    
+        break;
+
+      case 'footage-two':
+        document.getElementById('footage-two').currentTime = 
+          round(random(0, int(document.getElementById('footage-two').duration)));    
+        break;
+
+      case 'footage-three':
+        document.getElementById('footage-three').currentTime = 
+          round(random(0, int(document.getElementById('footage-three').duration)));    
+        break;
+
+      case 'footage-four':
+        document.getElementById('footage-four').currentTime = 
+          round(random(0, int(document.getElementById('footage-four').duration)));    
+        break;
+    
+      default:
+        break;
+    }
+    // document.getElementById('footage-one').currentTime = 
+    //   round(random(0, int(document.getElementById('footage-one').duration)));
     btnclicked = false;
     setTimeout(() => {
-      objectDetector.detect(footageOne, getDetections);    
+      objectDetector.detect(currentFootage, getDetections);    
     }, 100);
   }
   else{
-    
-    objectDetector.detect(footageOne, getDetections);
+    objectDetector.detect(currentFootage, getDetections);
   }
 }
 
