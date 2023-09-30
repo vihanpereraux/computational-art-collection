@@ -1,0 +1,99 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  background: black;
+}
+
+canvas {
+  position: relative;
+  display: block;
+  z-index: 1000;
+}
+
+#controllers-wrapper{
+  padding-left: 2%;
+  padding-top: 2%;
+}
+
+#cables-effect{
+  display: none;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  top: 50%;
+  width: calc(1080px/ 3) !important;
+  height: calc(1920px/ 3) !important;
+}
+
+#stat{
+  width: 400px;
+  height: 100vh;
+  overflow-y: auto;
+  background: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: white;
+  text-transform: capitalize;
+}
+#stat::-webkit-scrollbar{
+  display: none !important;
+}
+
+#audio-stat{
+  width: 300px;
+  height: 500px;
+  position: absolute;
+  bottom: 0;
+  left: 2%;
+  background: none;
+  overflow-y: auto;
+  color: rgb(0, 194, 0);
+}
+#audio-stat::-webkit-scrollbar{
+  display: none;
+}
+
+#feed-stat{
+  text-transform: uppercase;
+  position: absolute;
+  left: 2%;
+  top: 15%;
+  color: white;
+}
+
+#footage-one{
+  position: absolute;
+  width: calc(1080px/ 3) !important;
+  height: calc(1920px/ 3) !important;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#footage-two{
+  position: absolute;
+  width: calc(1080px/ 3) !important;
+  height: calc(1920px/ 3) !important;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#footage-three{
+  position: absolute;
+  width: calc(1080px/ 3) !important;
+  height: calc(1920px/ 3) !important;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#footage-four{
+  position: absolute;
+  width: calc(1080px/ 3) !important;
+  height: calc(1920px/ 3) !important;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
