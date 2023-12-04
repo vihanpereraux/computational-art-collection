@@ -1,0 +1,15 @@
+canvas {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    top: 50%;
+    width: 40vw !important;
+    height: 100vh;
+}
+#access-button{
+    position: absolute;
+    left: 2%;
+    top: 2%;
+    width: 12%;
+    height: 5%;
+}
